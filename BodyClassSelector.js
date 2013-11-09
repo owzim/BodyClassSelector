@@ -9,7 +9,7 @@ BodyClassSelector = (function ($, window, undefined) {
 		_optionsList,
 		_isPinned = false,
 		_isVisible = false,
-		_elID = "wzmBodyClassSelector",
+		_elID = "BodyClassSelector",
 		_css = {
 			wrapper:		{
 				position: "fixed",
@@ -64,7 +64,7 @@ BodyClassSelector = (function ($, window, undefined) {
 				var $wrapper = _$wrapper,
 					$hitArea = _$hitArea;
 
-				_$body.prepend($wrapper);
+				_$body.append($wrapper);
 				$wrapper.prepend($hitArea);
 
 				if(_settings.preventStylingViaJS !== true) {
@@ -206,23 +206,22 @@ BodyClassSelector = (function ($, window, undefined) {
 
 				// creating local refs
 				var $radios = _$wrapper.find("input[type=radio]"),
-					$checkboxes = _$wrapper.find("input[type=checkbox]"),
-					that = this; // to overcome scope issues within handlers
+					$checkboxes = _$wrapper.find("input[type=checkbox]");
 
 				_$hitArea
-					.on("mouseover", function() {
-						that.show();
-					});
+					.on("mouseover", $.proxy(function() {
+						this.show();
+					}, this));
 
 				_$wrapper
-					.on("mouseleave", function() { // "mouseleave" rather that "mouseout", because it works better
-						that.hide();
-					});
+					.on("mouseleave", $.proxy(function() { // "mouseleave" rather than "mouseout", because it works better
+						this.hide();
+					}, this));
 
 				_$wrapper
-					.on("dblclick", function() {
-						that._toggleIsPinned();
-					});
+					.on("dblclick", $.proxy(function() {
+						this._toggleIsPinned();
+					}, this));
 
 				// making text unselectable cross browser, to prevent the double click for pinning to select text
 				_$wrapper
@@ -231,20 +230,20 @@ BodyClassSelector = (function ($, window, undefined) {
 					.on('selectstart', false);
 
 				$radios
-					.on("click", function() {
-						that._check($(this));
-					});
+					.on("click", $.proxy(function() {
+						this._check($(e.target));
+					}, this));
 
 				$checkboxes
-					.on("click", function() {
-						var $t = $(this);
+					.on("click", $.proxy(function(e) {
+						var $t = $(e.target);
 						// TODO, encapsulate into extra method
 						if($t.is(":checked")) {
 							_$body.addClass($t.val());
 						} else {
 							_$body.removeClass($t.val());
 						}
-					});
+					}, this));
 			},
 
 
@@ -294,13 +293,12 @@ BodyClassSelector = (function ($, window, undefined) {
 			 * @return {void}
 			 */
 			_applyClassesFromBody: function() {
-				var that = this; // to overcome scope issues within handlers
-				this._getAllInputs().each(function(i, e) {
+				this._getAllInputs().each($.proxy(function(i, e) {
 					var $e = $(e);
 					if(_$body.hasClass($e.val())) {
-						that._check($e);
+						this._check($e);
 					}
-				});
+				}, this));
 			},
 
 
@@ -311,7 +309,6 @@ BodyClassSelector = (function ($, window, undefined) {
 			 * @return {void}
 			 */
 			_check: function($e) {
-				var that = this; // to overcome scope issues within handlers
 				// TODO: hacky, hacky, hacky and dirrrty
 				if($e.attr("type") === "radio") {
 					$e.closest(".OptionGroup").find("input").each(function(i, e) {  // TODO, hacky
