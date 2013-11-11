@@ -28,7 +28,7 @@ With the BodyClassSelector you would add those two additional classes ```larger-
 Include script *after* the **jQuery** library:
 
 ```html
-<script src="/your-js-folder/BodyClassSelector.js"></script>
+<script src="/your-js-folder/jquery.obcs.js"></script>
 ```
 
 ## Usage
@@ -36,7 +36,7 @@ Include script *after* the **jQuery** library:
 Initialize with the *list of options/body classes* (Array) you want to toggle and and optional *settings* (Object):
 
 ```javascript
-BodyClassSelector.init(optionsList, settings);
+$.obcs.init(optionsList, settings);
 ```
 
 ```optionsList``` must be of the following structure:
@@ -49,8 +49,14 @@ var optionsList = [
 		type: "checkbox", // can be "checkbox" or "radio"
 		elements: [ // the actual input elements
 			{
-				title: "Handsome class", // input label - optional, when missing, className is used
-				className: "handsome-class" // actual class name to be added to or removed from the body
+				// input label - optional, when missing, className is used
+				title: "Handsome class",
+				
+				// actual class name to be added to or removed from the body
+				className: "handsome-class", 
+				
+				// sets the input to checked, and automatically applies this class to the body
+				checked: true
 			},
 			{
 				// ...
@@ -98,7 +104,7 @@ titlesPrefix: "Class: "
 Manually show the options list. It happens automatically, when the mouse cursor hits the left side (determined by ```hitAreaWidth```) of the browser's content area.
 
 ```javascript
-BodyClassSelector.show()
+$.obcs.show()
 ```
 
 ### Hide
@@ -106,7 +112,7 @@ BodyClassSelector.show()
 Manually hide the options list. It happens automatically, when the mouse cursor leaves the options list.
 
 ```javascript
-BodyClassSelector.hide()
+$.obcs.hide()
 ```
 
 ### Pin
@@ -114,7 +120,7 @@ BodyClassSelector.hide()
 Manually pin the options list. It happens automatically, when you double click it.
 
 ```javascript
-BodyClassSelector.pin()
+$.obcs.pin()
 ```
 
 ### Pin
@@ -122,5 +128,5 @@ BodyClassSelector.pin()
 Manually unpin the options list. It happens automatically, when you double click it, and it was pinned before.
 
 ```javascript
-BodyClassSelector.unpin()
+$.obcs.unpin()
 ```
