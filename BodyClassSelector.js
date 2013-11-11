@@ -45,7 +45,7 @@ BodyClassSelector = (function ($, window, undefined) {
 		_defaultSettings = {
 			width: "200px",
 			hitAreaWidth: "20px",
-			preventStylingViaJS: false,
+			preventStyling: false,
 			titlesPrefix: "Class: "
 		},
 
@@ -58,16 +58,21 @@ BodyClassSelector = (function ($, window, undefined) {
 			 */
 			_create: function() {
 
-				_$wrapper = $('<div></div>').attr("id", _elID);
-				_$hitArea = $('<div></div>').attr("id", _elID + "-hitArea");
+				_$wrapper = $('<div></div>').attr({
+					id: _elID,
+					class: _elID
+				});
+				_$hitArea = $('<div></div>').attr({
+					class: "hitArea"	
+				});
 
 				var $wrapper = _$wrapper,
 					$hitArea = _$hitArea;
 
-				_$body.append($wrapper);
 				$wrapper.prepend($hitArea);
+				_$body.append($wrapper);
 
-				if(_settings.preventStylingViaJS !== true) {
+				if(_settings.preventStyling !== true) {
 					$wrapper.css(_css.wrapper);
 					$hitArea.css(_css.hitArea);
 				}
@@ -186,9 +191,13 @@ BodyClassSelector = (function ($, window, undefined) {
 						$input
 					).append(
 						" " + (option.title || option.className)
-					).css(
+					);
+					
+				if(!_settings.preventStyling) {
+					$label.css(
 						"display", "block"
 					);
+				}
 
 				if(option.checked === true) $input.attr("checked", "checked");
 
