@@ -63,7 +63,7 @@ BodyClassSelector = (function ($, window, undefined) {
 					class: _elID
 				});
 				_$hitArea = $('<div></div>').attr({
-					class: "hitArea"	
+					class: "hitArea"
 				});
 
 				var $wrapper = _$wrapper,
@@ -192,8 +192,8 @@ BodyClassSelector = (function ($, window, undefined) {
 					).append(
 						" " + (option.title || option.className)
 					);
-					
-				if(!_settings.preventStyling) {
+
+				if(_settings.preventStyling !== true) {
 					$label.css(
 						"display", "block"
 					);
