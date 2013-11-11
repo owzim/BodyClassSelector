@@ -117,7 +117,7 @@ Manually pin the options list. It happens automatically, when you double click i
 BodyClassSelector.pin()
 ```
 
-### Pin
+### Unpin
 
 Manually unpin the options list. It happens automatically, when you double click it, and it was pinned before.
 
