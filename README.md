@@ -21,11 +21,11 @@ So in your CSS you could do something like this:
 	width: 30%
 }
 
-.larger-sidebar .sidebar {
+.wide-sidebar .sidebar {
 	width: 40%
 }
 
-.smaller-sidebar .sidebar {
+.narrow-sidebar .sidebar {
 	width: 20%
 }
 ```
@@ -101,6 +101,46 @@ var classList = [
 	}
 
 ]
+```
+
+### Example
+
+```javascript
+$.obcs.init([
+	{
+		title: "Debug",
+		type: "checkbox"
+		elements: [
+			{
+				title: "Grid debug",
+				className: "grid-debug",
+				checked: true
+			},
+			{
+				title: "old IE styles",
+				className: "oldie"
+			}
+		]
+	},
+	{
+		title: "Sidebar width",
+		type: "radio"
+		elements: [
+			{
+				title: "regular",
+				className: "regular-sidebar"
+			},
+			{
+				title: "wide",
+				className: "wide-sidebar"
+			},
+			{
+				title: "narrow",
+				className: "narrow-sidebar"
+			}
+		]
+	}
+], {preventStyling: true});
 ```
 
 ## Settings
