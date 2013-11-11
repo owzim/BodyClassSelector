@@ -76,7 +76,7 @@ hitAreaWidth: "20px"
 
 ### Prevent JS based styling
 
-By default, the list is styled via JS with some basic styles, so no additional CSS is needed. If you want custom CSS, you might want to set this to ```true``, to prevent JS based styling so you don't have to mess around with loads of ```!important```s
+By default, the list is styled via JS with some basic styles, so no additional CSS is needed. If you want custom CSS, you might want to set this to ```true```, to prevent JS based styling so you don't have to mess around with loads of ```!important```s
 
 ```javascript
 preventStyling: false
