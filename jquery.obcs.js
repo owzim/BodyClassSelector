@@ -61,10 +61,10 @@
 
 					_$wrapper = $('<div></div>').attr({
 						id: _elID,
-						class: _elID
+						"class": _elID
 					});
 					_$hitArea = $('<div></div>').attr({
-						class: "hitArea"
+						"class": "hitArea"
 					});
 
 					var $wrapper = _$wrapper,
@@ -115,13 +115,14 @@
 						oge = og.elements,
 						len = oge.length,
 						c,
-						$optionGroup = $("<div></div>");
+						$optionGroup = $("<div></div>"),
+						$title = $("<div></div>").html(optionGroup.title).attr("class", "title");
 
-					$optionGroup.append(
-						$("<h4></h4>")
-							.html(optionGroup.title)
-							.attr("class", "title")
-					).attr("class", "OptionGroup");
+					$optionGroup.append($title).attr("class", "OptionGroup");
+
+					if(_settings.preventStyling !== true) {
+						$title.css({color: "white", fontWight: "bold", margin: "1em 0"});
+					}
 
 					for (var i = 0; i < len; i++) {
 						c = oge[i];
@@ -176,7 +177,7 @@
 				 */
 				_createOption: function(option, optionGroup, $optionGroup) {
 
-					var $label = $("<label></label>");
+					var $label = $("<label></label>"),
 						$input = $("<input></input>")
 							.attr("type", optionGroup.type)
 							.attr("value", option.className);
@@ -201,6 +202,8 @@
 					}
 
 					if(option.checked === true) $input.attr("checked", "checked");
+
+					$input.data('option', option);
 
 					_allClasses.push(option.className);
 
@@ -240,8 +243,10 @@
 						.on('selectstart', false);
 
 					$radios
-						.on("click", $.proxy(function() {
+						.on("click", $.proxy(function(e) {
+							$t = $(e.target);
 							this._check($(e.target));
+							if($t.data("option").callback !== undefined) $t.data("option").callback($t, $t.data("option"));
 						}, this));
 
 					$checkboxes
@@ -253,6 +258,7 @@
 							} else {
 								_$body.removeClass($t.val());
 							}
+							if($t.data("option").callback !== undefined) $t.data("option").callback($t, $t.data("option"));
 						}, this));
 				},
 
