@@ -2,7 +2,7 @@
 
 	$.obcs = (function() {
 		// private vars
-		var _$body,
+		var	_$body,
 			_$wrapper,
 			_$hitArea,
 			_allClasses = [],
@@ -67,7 +67,7 @@
 						"class": "hitArea"
 					});
 
-					var $wrapper = _$wrapper,
+					var	$wrapper = _$wrapper,
 						$hitArea = _$hitArea;
 
 					$wrapper.prepend($hitArea);
@@ -89,7 +89,7 @@
 				 * @return {void}
 				 */
 				_createOptions: function() {
-					var ol = _optionsList,
+					var	ol = _optionsList,
 						len = ol.length,
 						c,
 						$options = $("<div></div>");
@@ -111,7 +111,7 @@
 				 * @return {jQueryElement}
 				 */
 				_createOptionGroup: function(optionGroup, groupIndex) {
-					var og = optionGroup,
+					var	og = optionGroup,
 						oge = og.elements,
 						len = oge.length,
 						c,
@@ -177,7 +177,7 @@
 				 */
 				_createOption: function(option, optionGroup, $optionGroup) {
 
-					var $label = $("<label></label>"),
+					var	$label = $("<label></label>"),
 						$input = $("<input></input>")
 							.attr("type", optionGroup.type)
 							.attr("value", option.className);
@@ -218,7 +218,7 @@
 				_createEventHandlers: function() {
 
 					// creating local refs
-					var $radios = _$wrapper.find("input[type=radio]"),
+					var	$radios = _$wrapper.find("input[type=radio]"),
 						$checkboxes = _$wrapper.find("input[type=checkbox]");
 
 					_$hitArea
@@ -286,7 +286,7 @@
 				 * @return {Array}
 				 */
 				_getCheckedClasses: function() {
-					var $checkedInputs = this._getCheckedInputs(),
+					var	$checkedInputs = this._getCheckedInputs(),
 						checkedClasses = [];
 					$checkedInputs.each(function() {
 						checkedClasses.push($(this).val());
