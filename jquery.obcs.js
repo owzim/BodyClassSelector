@@ -162,8 +162,8 @@
 					});
 
 					if(checkedArr.length > 1 || checkedArr.length === 0) {
-						$optionGroup.find("input").removeAttr("checked");
-						$optionGroup.find("input").eq(0).attr("checked", "checked");
+						$optionGroup.find("input").prop("checked");
+						$optionGroup.find("input").eq(0).prop("checked", "checked");
 					}
 				},
 
@@ -201,7 +201,7 @@
 						);
 					}
 
-					if(option.checked === true) $input.attr("checked", "checked");
+					if(option.checked === true) $input.prop("checked", "checked");
 
 					$input.data('option', option);
 
@@ -328,11 +328,11 @@
 					// TODO: hacky, hacky, hacky and dirrrty
 					if($e.attr("type") === "radio") {
 						$e.closest(".OptionGroup").find("input").each(function(i, e) {  // TODO, hacky
-							$(e).removeAttr("checked");
+							$(e).prop("checked");
 							_$body.removeClass($(e).val());
 						});
 					}
-					$e.attr("checked", "checked");
+					$e.prop("checked", "checked");
 					_$body.addClass($e.val());
 				},
 
